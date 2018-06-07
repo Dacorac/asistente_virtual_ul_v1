@@ -1,0 +1,27 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ]
+  },
+  "files": [
+    "node_modules/ng-mdb-pro/index.ts"
+  ],
+  "include": [
+    "node_modules/api-ai-javascript/*.ts",
+    "node_modules/ng-mdb-pro/**/*.ts",
+    "src/**/*.ts"
+  ]
+}

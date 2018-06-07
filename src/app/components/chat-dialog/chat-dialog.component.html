@@ -1,0 +1,71 @@
+<h1 class="title">Asistente Virtual</h1>
+
+<div class="chat" [ngClass]="{'show': (show$ | async) }">
+
+  <div class="wrapper">
+    <a (click)="onHide()" class="close-button">
+      <div class="in">
+        <div class="close-button-block"></div>
+        <div class="close-button-block"></div>
+      </div>
+      <div class="out">
+        <div class="close-button-block"></div>
+        <div class="close-button-block"></div>
+      </div>
+    </a>
+  </div>
+
+  <div class="chat-container">
+
+    <ul class="chat-window">
+      <li *ngFor="let message of messages | async">
+
+          <div>
+              <img src="{{ message.avatar }}" class="avatar" [ngClass]="{ 'bot' : message.sentBy === 'bot',
+                                                                          'user' : message.sentBy === 'user' }">
+          </div>
+          <div #toScroll class="message card card-body animated"
+          [ngClass]="{ 'from fadeInLeft': message.sentBy === 'bot',
+                       'to fadeInRight':   message.sentBy === 'user'}">
+            {{ message.content }}
+          </div>
+      </li>
+      <div *ngIf="qrResponse">
+        <div class="inline-quickreply" *ngFor="let quickreply of quickreplies">
+          <button (click)="sendQuickReply([quickreply.payload])"
+                  type="button"
+                  class="btn aqua-gradient btn-rounded waves-light animated pulse"
+                  mdbWavesEffect>
+                  {{ quickreply.title }}
+          </button>
+        </div>
+      </div>
+    </ul>
+
+  </div>
+
+<div class="input-container clearfix">
+
+  <div class="message-field float-left">
+    <textarea placeholder="Escribe tu pregunta aquí..." 
+              autosize
+              [(ngModel)]="formValue"
+              [ngClass]="{ disabled : qrResponse == true }"
+              (keyup.enter)="sendMessage()"
+              type="text"
+              id="txtArea"
+              class="form-control"
+              rows="1">
+    </textarea>
+  </div>
+
+
+  <div class="div-button float-right">
+    <button type="button"
+            class="send-button plus"
+            (click)="sendMessage()">
+    </button>
+  </div>
+
+</div>
+</div>
